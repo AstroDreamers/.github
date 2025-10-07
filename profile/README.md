@@ -1,6 +1,4 @@
-<div align="center">
-
-<h1>🌍 AstroDreamers</h1>
+<h1 align="center">🌍 AstroDreamers</h1>
 
 <div align="center">
 
