@@ -42,30 +42,41 @@ AstroDreamers transforms NASA TEMPO satellite data and ground-based sensors into
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   Frontend (React 19.1)                      │
+│                   Frontend (React 19.1)                     │
 │         Tailwind CSS · Leaflet Maps · Recharts              │
 └────────────────────┬────────────────────────────────────────┘
                      │ REST API
                      │
 ┌────────────────────▼────────────────────────────────────────┐
-│              Backend (Spring Boot 3.5.6)                     │
+│              Backend (Spring Boot 3.5.6)                    │
 │  Authentication · Subscriptions · Alerts · Email Service    │
-└────────┬───────────────────────────────────────┬────────────┘
-         │                                       │
-         │ HTTP Request                          │ JPA/Hibernate
-         │                                       │
-┌────────▼────────────────┐           ┌─────────▼─────────────┐
-│   ML Service (FastAPI)  │           │  PostgreSQL Database  │
-│  LightGBM · Random      │           │  Users · Subscriptions│
-│  Forest · scikit-learn  │           │  Alerts · Predictions │
-└─────────────────────────┘           └───────────────────────┘
-         │
-         │ Data Feed
-         │
-┌────────▼─────────────────────────────────────────────────────┐
-│                    External APIs                              │
-│         OpenAQ Ground Sensors · NASA TEMPO Satellite         │
-└───────────────────────────────────────────────────────────────┘
+│                                                             │
+│  ┌────────────────┐    ┌─────────────────────────────────┐  │
+│  │  OpenAQ API    │    │  ML Prediction Service Client   │  │
+│  │  Integration   │    │  (calls FastAPI for forecasts)  │  │
+│  └────────────────┘    └─────────────────────────────────┘  │
+└─────────┬────────────────────────────── ┬───────────────────┘
+          │                               │
+          │ Fetches real-time data        │ HTTP Request
+          │                               │
+┌─────────▼────────────────┐     ┌────────▼──────────────────┐
+│   External APIs          │     │  ML Service (FastAPI)     │
+│  • OpenAQ Ground Sensors │     │  Serves pre-trained       │
+│  • NASA TEMPO Satellite  │     │  pickle models:           │
+└──────────────────────────┘     │  • LightGBM               │
+          |                      │  • Random Forest          │
+          |                      │  Returns PM2.5 forecasts  │
+          |                      └───────────────────────────┘
+          │
+          │ JPA/Hibernate
+          │
+┌─────────▼─────────────────┐
+│  PostgreSQL Database      │
+│  • Users                  │
+│  • Subscriptions          │
+│  • Alerts                 │
+│  • Historical Data        │
+└───────────────────────────┘
 ```
 
 **Flow**: Frontend → Spring Boot → FastAPI (ML predictions) → PostgreSQL + External APIs
@@ -111,7 +122,7 @@ AstroDreamers/
 │   ├── model/                 # JPA entities
 │   └── repository/            # Data access
 │
-├── tempo-ml-service/          # FastAPI ML microservice
+├── tempo-ml-service/          # FastAPI ML service
 │   ├── models/                # LightGBM & Random Forest models
 │   ├── api/                   # FastAPI endpoints
 │   ├── training/              # Model training scripts
@@ -132,7 +143,7 @@ AstroDreamers/
 | **Frontend** | [astrodreamers.netlify.app](https://astrodreamers.netlify.app) | ✅ Live |
 | **Backend API** | [tempo-backend-rzn2.onrender.com](https://tempo-backend-rzn2.onrender.com) | ✅ Live |
 | **API Docs** | [tempo-backend-rzn2.onrender.com/swagger-ui](https://tempo-backend-rzn2.onrender.com/swagger-ui) | ✅ Live |
-| **ML Service** | Internal microservice | ✅ Live |
+| **ML Service** | [https://tempo-ml-lab-1.onrender.com](https://tempo-ml-lab-1.onrender.com) | ✅ Live |
 
 ---
 
