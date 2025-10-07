@@ -10,7 +10,7 @@
 
 **A full-stack enterprise solution for real-time air quality monitoring and intelligent alert management**
 
-[Live Demo](https://astrodreamers.netlify.app) · [Backend API](https://tempo-backend-rzn2.onrender.com) · [API Documentation](https://tempo-backend-rzn2.onrender.com/swagger-ui)
+[Live Demo](https://astrodreamers.netlify.app) · [API Documentation](https://tempo-backend-rzn2.onrender.com/swagger-ui)
 
 </div>
 
