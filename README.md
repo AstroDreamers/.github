@@ -2,7 +2,7 @@
 
 <h1>🌍 AstroDreamers</h1>
 
-</div>
+
 ![NASA TEMPO](https://img.shields.io/badge/NASA-TEMPO-blue?style=for-the-badge)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen?style=for-the-badge&logo=springboot)
 ![React](https://img.shields.io/badge/React-19.1-61DAFB?style=for-the-badge&logo=react)
